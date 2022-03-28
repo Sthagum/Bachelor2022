@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "7f5PyWbrKSJaYZemse8mzPFHOP990C49ba5lBlN0jE7kmkbbm+nivxZ8iqgmnbWJ7iL6QJkzICSHsKTOlXntmg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jaran\\OneDrive\\Documents\\Code\\Bachelor2022\\QuadBook.Api\\QuadBook.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaran\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Jaran\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Jaran\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Jaran\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Jaran\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Jaran\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
