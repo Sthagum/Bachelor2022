@@ -8,6 +8,12 @@
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
 
+        public int UserID { get; set; }
+        public User User { get; set; }
+
+        public int ResourceID { get; set; }
+        public Resource Resource { get; set; }
+
         public Booking()
         {
 
