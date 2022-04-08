@@ -12,5 +12,10 @@ namespace QuadBook.Data
         }
         public DbSet<QuadBook.Models.Booking> Booking { get; set; }
         public DbSet<QuadBook.Models.Company> Company { get; set; }
+        public DbSet<QuadBook.Models.Location> Location { get; set; }
+        public DbSet<QuadBook.Models.Resource> Resource { get; set; }
+        public DbSet<QuadBook.Models.ResourceProperties> ResourceProperties { get; set; }
+        public DbSet<QuadBook.Models.ResourceType> ResourceType { get; set; }
+        public DbSet<QuadBook.Models.TypeProperties> TypeProperties { get; set; }
     }
 }
