@@ -8,10 +8,5 @@
         
         public int typePropertiesId { get; set; }
         public TypeProperties TypeProperties { get; set; }
-        
-        public ResourceProperties()
-        {
-
-        }
     }
 }

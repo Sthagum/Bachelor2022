@@ -9,15 +9,15 @@ namespace QuadBook.Models
         public int CompanyID { get; set; }
         public Company Company { get; set; }
 
-        protected void OnModelCreating(ModelBuilder modelBuilder)
+       /* protected void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CompanyLocation>()
                 .HasKey(c => new { c.Company, c.Location });
         }
-
         public CompanyLocation()
         {
 
         }
+       */
     }
 }

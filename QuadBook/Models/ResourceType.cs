@@ -5,9 +5,5 @@ namespace QuadBook.Models
     {
         public int resourceTypeId { get; set; }
         public string resourceTypeName { get; set; }
-        public ResourceType()
-        {
-
-        }
     }
 }

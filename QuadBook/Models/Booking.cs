@@ -13,10 +13,5 @@
 
         public int ResourceID { get; set; }
         public Resource Resource { get; set; }
-
-        public Booking()
-        {
-
-        }
     }
 }
