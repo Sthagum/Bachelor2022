@@ -109,7 +109,6 @@ namespace QuadBook.Data.Migrations
                 {
                     resourceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    resourceType = table.Column<int>(type: "int", nullable: false),
                     resourceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     locationId = table.Column<int>(type: "int", nullable: false),
                     resourcePropertiesID = table.Column<int>(type: "int", nullable: false),

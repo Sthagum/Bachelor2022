@@ -258,7 +258,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Booking", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.Company", b =>
@@ -275,7 +275,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasKey("CompanyID");
 
-                    b.ToTable("Company");
+                    b.ToTable("Company", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.Location", b =>
@@ -296,7 +296,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasKey("LocationID");
 
-                    b.ToTable("Location");
+                    b.ToTable("Location", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.Resource", b =>
@@ -331,7 +331,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasIndex("resourcePropertiesID");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resource", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.ResourceProperties", b =>
@@ -353,7 +353,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasIndex("typePropertiesId");
 
-                    b.ToTable("ResourceProperties");
+                    b.ToTable("ResourceProperties", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.ResourceType", b =>
@@ -370,7 +370,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasKey("resourceTypeId");
 
-                    b.ToTable("ResourceType");
+                    b.ToTable("ResourceType", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.TypeProperties", b =>
@@ -387,7 +387,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasKey("typePropertiesId");
 
-                    b.ToTable("TypeProperties");
+                    b.ToTable("TypeProperties", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.User", b =>
@@ -413,7 +413,7 @@ namespace QuadBook.Data.Migrations
 
                     b.HasIndex("CompanyID");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

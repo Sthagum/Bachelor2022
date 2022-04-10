@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.resourceType)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.resourceName)
             </th>
             <th>
@@ -24,18 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ResourceProperties)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResourceType)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.resourceType)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.resourceName)
             </td>
@@ -44,9 +35,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ResourceProperties.resourcePropertiesId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResourceType.resourceTypeId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.resourceId">Edit</a> |

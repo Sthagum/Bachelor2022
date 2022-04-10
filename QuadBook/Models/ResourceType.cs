@@ -1,4 +1,5 @@
-﻿namespace QuadBook.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace QuadBook.Models
 {
     public class ResourceType
     {
