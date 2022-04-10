@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuadBook.Data;
 
 #nullable disable
 
-namespace QuadBook.Data.Migrations
+namespace QuadBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220407095525_addCompany")]
-    partial class addCompany
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,6 +232,12 @@ namespace QuadBook.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ResourceID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("endDate")
                         .HasColumnType("datetime2");
 
@@ -249,6 +253,10 @@ namespace QuadBook.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResourceID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Booking");
                 });
@@ -268,6 +276,141 @@ namespace QuadBook.Data.Migrations
                     b.HasKey("CompanyID");
 
                     b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.Location", b =>
+                {
+                    b.Property<int>("LocationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationID"), 1L, 1);
+
+                    b.Property<string>("BuildingName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LocationID");
+
+                    b.ToTable("Location");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.Resource", b =>
+                {
+                    b.Property<int>("resourceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourceId"), 1L, 1);
+
+                    b.Property<int?>("ResourceTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("locationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("resourceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("resourcePropertiesID")
+                        .HasColumnType("int");
+
+                    b.HasKey("resourceId");
+
+                    b.HasIndex("ResourceTypeID");
+
+                    b.HasIndex("locationId");
+
+                    b.HasIndex("resourcePropertiesID");
+
+                    b.ToTable("Resource");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.ResourceProperties", b =>
+                {
+                    b.Property<int>("resourcePropertiesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourcePropertiesId"), 1L, 1);
+
+                    b.Property<int>("typePropertiesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("resourcePropertiesId");
+
+                    b.HasIndex("typePropertiesId");
+
+                    b.ToTable("ResourceProperties");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.ResourceType", b =>
+                {
+                    b.Property<int>("resourceTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourceTypeId"), 1L, 1);
+
+                    b.Property<string>("resourceTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("resourceTypeId");
+
+                    b.ToTable("ResourceType");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.TypeProperties", b =>
+                {
+                    b.Property<int>("typePropertiesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("typePropertiesId"), 1L, 1);
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("typePropertiesId");
+
+                    b.ToTable("TypeProperties");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"), 1L, 1);
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserID");
+
+                    b.HasIndex("CompanyID");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,6 +462,68 @@ namespace QuadBook.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("QuadBook.Models.Booking", b =>
+                {
+                    b.HasOne("QuadBook.Models.Resource", "Resource")
+                        .WithMany()
+                        .HasForeignKey("ResourceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuadBook.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resource");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.Resource", b =>
+                {
+                    b.HasOne("QuadBook.Models.ResourceType", "ResourceType")
+                        .WithMany()
+                        .HasForeignKey("ResourceTypeID");
+
+                    b.HasOne("QuadBook.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("locationId");
+
+                    b.HasOne("QuadBook.Models.ResourceProperties", "ResourceProperties")
+                        .WithMany()
+                        .HasForeignKey("resourcePropertiesID");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("ResourceProperties");
+
+                    b.Navigation("ResourceType");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.ResourceProperties", b =>
+                {
+                    b.HasOne("QuadBook.Models.TypeProperties", "TypeProperties")
+                        .WithMany()
+                        .HasForeignKey("typePropertiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TypeProperties");
+                });
+
+            modelBuilder.Entity("QuadBook.Models.User", b =>
+                {
+                    b.HasOne("QuadBook.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

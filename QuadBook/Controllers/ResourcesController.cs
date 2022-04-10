@@ -62,7 +62,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("resourceId,resourceType,resourceName,locationId,resourcePropertiesID,ResourceTypeID")] Resource resource)
+        public async Task<IActionResult> Create([Bind("resourceId,resourceName,locationId,resourcePropertiesID,ResourceTypeID")] Resource resource)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("resourceId,resourceType,resourceName,locationId,resourcePropertiesID,ResourceTypeID")] Resource resource)
+        public async Task<IActionResult> Edit(int id, [Bind("resourceId,resourceName,locationId,resourcePropertiesID,ResourceTypeID")] Resource resource)
         {
             if (id != resource.resourceId)
             {

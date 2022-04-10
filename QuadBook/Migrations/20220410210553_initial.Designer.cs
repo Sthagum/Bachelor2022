@@ -9,11 +9,11 @@ using QuadBook.Data;
 
 #nullable disable
 
-namespace QuadBook.Data.Migrations
+namespace QuadBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220408142337_mangler bare companylocation")]
-    partial class manglerbarecompanylocation
+    [Migration("20220410210553_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -309,20 +309,17 @@ namespace QuadBook.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourceId"), 1L, 1);
 
-                    b.Property<int>("ResourceTypeID")
+                    b.Property<int?>("ResourceTypeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("locationId")
+                    b.Property<int?>("locationId")
                         .HasColumnType("int");
 
                     b.Property<string>("resourceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("resourcePropertiesID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("resourceType")
+                    b.Property<int?>("resourcePropertiesID")
                         .HasColumnType("int");
 
                     b.HasKey("resourceId");
@@ -492,21 +489,15 @@ namespace QuadBook.Data.Migrations
                 {
                     b.HasOne("QuadBook.Models.ResourceType", "ResourceType")
                         .WithMany()
-                        .HasForeignKey("ResourceTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ResourceTypeID");
 
                     b.HasOne("QuadBook.Models.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("locationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("locationId");
 
                     b.HasOne("QuadBook.Models.ResourceProperties", "ResourceProperties")
                         .WithMany()
-                        .HasForeignKey("resourcePropertiesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("resourcePropertiesID");
 
                     b.Navigation("Location");
 
