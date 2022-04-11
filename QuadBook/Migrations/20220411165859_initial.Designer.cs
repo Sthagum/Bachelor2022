@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuadBook.Data;
 
@@ -11,9 +12,10 @@ using QuadBook.Data;
 namespace QuadBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220411165859_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,17 +309,17 @@ namespace QuadBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourceId"), 1L, 1);
 
-                    b.Property<int?>("ResourceTypeID")
+                    b.Property<int>("ResourceTypeID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("locationId")
+                    b.Property<int>("locationId")
                         .HasColumnType("int");
 
                     b.Property<string>("resourceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("resourcePropertiesID")
+                    b.Property<int>("resourcePropertiesID")
                         .HasColumnType("int");
 
                     b.HasKey("resourceId");
@@ -343,7 +345,6 @@ namespace QuadBook.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("value")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("resourcePropertiesId");
@@ -487,15 +488,21 @@ namespace QuadBook.Migrations
                 {
                     b.HasOne("QuadBook.Models.ResourceType", "ResourceType")
                         .WithMany()
-                        .HasForeignKey("ResourceTypeID");
+                        .HasForeignKey("ResourceTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QuadBook.Models.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("locationId");
+                        .HasForeignKey("locationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QuadBook.Models.ResourceProperties", "ResourceProperties")
                         .WithMany()
-                        .HasForeignKey("resourcePropertiesID");
+                        .HasForeignKey("resourcePropertiesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 

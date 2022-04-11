@@ -234,7 +234,7 @@ namespace QuadBook.Migrations
                 {
                     resourcePropertiesId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    value = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     typePropertiesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -255,9 +255,9 @@ namespace QuadBook.Migrations
                     resourceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     resourceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    locationId = table.Column<int>(type: "int", nullable: true),
-                    resourcePropertiesID = table.Column<int>(type: "int", nullable: true),
-                    ResourceTypeID = table.Column<int>(type: "int", nullable: true)
+                    locationId = table.Column<int>(type: "int", nullable: false),
+                    resourcePropertiesID = table.Column<int>(type: "int", nullable: false),
+                    ResourceTypeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,17 +266,20 @@ namespace QuadBook.Migrations
                         name: "FK_Resource_Location_locationId",
                         column: x => x.locationId,
                         principalTable: "Location",
-                        principalColumn: "LocationID");
+                        principalColumn: "LocationID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceProperties_resourcePropertiesID",
                         column: x => x.resourcePropertiesID,
                         principalTable: "ResourceProperties",
-                        principalColumn: "resourcePropertiesId");
+                        principalColumn: "resourcePropertiesId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceType_ResourceTypeID",
                         column: x => x.ResourceTypeID,
                         principalTable: "ResourceType",
-                        principalColumn: "resourceTypeId");
+                        principalColumn: "resourceTypeId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
