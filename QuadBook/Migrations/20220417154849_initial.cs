@@ -235,8 +235,7 @@ namespace QuadBook.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ResourceName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     ResourceTypeID = table.Column<int>(type: "int", nullable: false),
-                    ResourcePropertiesID = table.Column<int>(type: "int", nullable: false),
-                    ResourcePropertyID = table.Column<int>(type: "int", nullable: true),
+                    ResourcePropertyID = table.Column<int>(type: "int", nullable: false),
                     LocationID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -252,7 +251,8 @@ namespace QuadBook.Migrations
                         name: "FK_Resource_ResourceProperty_ResourcePropertyID",
                         column: x => x.ResourcePropertyID,
                         principalTable: "ResourceProperty",
-                        principalColumn: "ResourcePropertyID");
+                        principalColumn: "ResourcePropertyID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceType_ResourceTypeID",
                         column: x => x.ResourceTypeID,

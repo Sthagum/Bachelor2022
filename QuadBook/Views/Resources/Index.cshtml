@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.ResourceType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ResourcePropertiesID)
+                @Html.DisplayNameFor(model => model.ResourceProperty)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Location)
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.ResourceType.ResourceTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ResourcePropertiesID)
+                @Html.DisplayFor(modelItem => item.ResourceProperty.ResourcePropertyValue)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location.BuildingName)

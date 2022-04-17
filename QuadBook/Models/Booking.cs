@@ -21,6 +21,7 @@ namespace QuadBook.Models
         public DateTime EndDate { get; set; }
 
         [Required]
+        [Display(Name = "Ressurs")]
         public int ResourceID { get; set; }
         public Resource? Resource { get; set; }
     }

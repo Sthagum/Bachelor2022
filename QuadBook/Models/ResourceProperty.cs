@@ -12,6 +12,7 @@ namespace QuadBook.Models
         public string ResourcePropertyValue { get; set; }
 
         [Required]
+        [Display(Name = "Typens egenskap")]
         public int TypePropertyID { get; set; }
         public TypeProperty? TypeProperty { get; set; }
     }

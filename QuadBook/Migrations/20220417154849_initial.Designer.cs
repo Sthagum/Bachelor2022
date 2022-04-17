@@ -12,7 +12,7 @@ using QuadBook.Data;
 namespace QuadBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220417150504_initial")]
+    [Migration("20220417154849_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,10 +312,7 @@ namespace QuadBook.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ResourcePropertiesID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ResourcePropertyID")
+                    b.Property<int>("ResourcePropertyID")
                         .HasColumnType("int");
 
                     b.Property<int>("ResourceTypeID")
@@ -463,7 +460,9 @@ namespace QuadBook.Migrations
 
                     b.HasOne("QuadBook.Models.ResourceProperty", "ResourceProperty")
                         .WithMany()
-                        .HasForeignKey("ResourcePropertyID");
+                        .HasForeignKey("ResourcePropertyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QuadBook.Models.ResourceType", "ResourceType")
                         .WithMany()

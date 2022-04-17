@@ -18,7 +18,7 @@ namespace QuadBook.Models
 
         [Required]
         [Display(Name = "Egenskap")]
-        public int ResourcePropertiesID { get; set; }
+        public int ResourcePropertyID { get; set; }
         public ResourceProperty? ResourceProperty { get; set; }
 
         [Required]
