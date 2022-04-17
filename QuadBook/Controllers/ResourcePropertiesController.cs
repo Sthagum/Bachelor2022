@@ -49,7 +49,7 @@ namespace QuadBook.Controllers
         // GET: ResourceProperties/Create
         public IActionResult Create()
         {
-            ViewData["typePropertiesId"] = new SelectList(_context.Set<TypeProperties>(), "typePropertiesId", "typePropertiesId");
+            ViewBag.Options = new SelectList(_context.TypeProperties, nameof(TypeProperties.typePropertiesId), nameof(TypeProperties.name));
             return View();
         }
 
