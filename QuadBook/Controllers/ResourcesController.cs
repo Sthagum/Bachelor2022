@@ -23,7 +23,7 @@ namespace QuadBook.Controllers
         // GET: Resources
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Resource.Include(r => r.Location).Include(r => r.ResourceProperty).Include(r => r.ResourceType);
+            var applicationDbContext = _context.Resource.Include(r => r.Location).Include(r => r.ResourceProperty).Include(r => r.ResourceProperty.TypeProperty).Include(r => r.ResourceType);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,6 +38,7 @@ namespace QuadBook.Controllers
             var resource = await _context.Resource
                 .Include(r => r.Location)
                 .Include(r => r.ResourceProperty)
+                .Include(r => r.ResourceProperty.TypeProperty)
                 .Include(r => r.ResourceType)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (resource == null)
