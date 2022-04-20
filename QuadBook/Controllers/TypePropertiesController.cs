@@ -34,14 +34,14 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var typeProperties = await _context.TypeProperties
-                .FirstOrDefaultAsync(m => m.typePropertiesId == id);
-            if (typeProperties == null)
+            var typeProperty = await _context.TypeProperties
+                .FirstOrDefaultAsync(m => m.TypePropertyID == id);
+            if (typeProperty == null)
             {
                 return NotFound();
             }
 
-            return View(typeProperties);
+            return View(typeProperty);
         }
 
         // GET: TypeProperties/Create
@@ -55,15 +55,15 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("typePropertiesId,name")] TypeProperties typeProperties)
+        public async Task<IActionResult> Create([Bind("TypePropertyID,TypePropertyName")] TypeProperty typeProperty)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(typeProperties);
+                _context.Add(typeProperty);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(typeProperties);
+            return View(typeProperty);
         }
 
         // GET: TypeProperties/Edit/5
@@ -74,12 +74,12 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var typeProperties = await _context.TypeProperties.FindAsync(id);
-            if (typeProperties == null)
+            var typeProperty = await _context.TypeProperties.FindAsync(id);
+            if (typeProperty == null)
             {
                 return NotFound();
             }
-            return View(typeProperties);
+            return View(typeProperty);
         }
 
         // POST: TypeProperties/Edit/5
@@ -87,9 +87,9 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("typePropertiesId,name")] TypeProperties typeProperties)
+        public async Task<IActionResult> Edit(int id, [Bind("TypePropertyID,TypePropertyName")] TypeProperty typeProperty)
         {
-            if (id != typeProperties.typePropertiesId)
+            if (id != typeProperty.TypePropertyID)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace QuadBook.Controllers
             {
                 try
                 {
-                    _context.Update(typeProperties);
+                    _context.Update(typeProperty);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TypePropertiesExists(typeProperties.typePropertiesId))
+                    if (!TypePropertyExists(typeProperty.TypePropertyID))
                     {
                         return NotFound();
                     }
@@ -114,7 +114,7 @@ namespace QuadBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(typeProperties);
+            return View(typeProperty);
         }
 
         // GET: TypeProperties/Delete/5
@@ -125,14 +125,14 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var typeProperties = await _context.TypeProperties
-                .FirstOrDefaultAsync(m => m.typePropertiesId == id);
-            if (typeProperties == null)
+            var typeProperty = await _context.TypeProperties
+                .FirstOrDefaultAsync(m => m.TypePropertyID == id);
+            if (typeProperty == null)
             {
                 return NotFound();
             }
 
-            return View(typeProperties);
+            return View(typeProperty);
         }
 
         // POST: TypeProperties/Delete/5
@@ -140,15 +140,15 @@ namespace QuadBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var typeProperties = await _context.TypeProperties.FindAsync(id);
-            _context.TypeProperties.Remove(typeProperties);
+            var typeProperty = await _context.TypeProperties.FindAsync(id);
+            _context.TypeProperties.Remove(typeProperty);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TypePropertiesExists(int id)
+        private bool TypePropertyExists(int id)
         {
-            return _context.TypeProperties.Any(e => e.typePropertiesId == id);
+            return _context.TypeProperties.Any(e => e.TypePropertyID == id);
         }
     }
 }

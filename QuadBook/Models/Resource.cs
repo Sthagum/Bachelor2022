@@ -1,18 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace QuadBook.Models
 {
     public class Resource
     {
-        public int resourceId { get; set; }
-        public string resourceName { get; set; }
-        
-        public int locationId { get; set; }
-        public Location? Location { get; set; }
+        public int ID { get; set; }
 
-        public int resourcePropertiesID { get; set; }
-        public ResourceProperties? ResourceProperties { get; set; }
-        
+        [Required(ErrorMessage = "Vennligst fyll ut ressursnavn")]
+        [Display(Name = "Ressursnavn")]
+        [StringLength(30, ErrorMessage = "Ressursnavnet må være fra 2 til 30 tegn eller bokstaver", MinimumLength = 3)]
+        public string ResourceName { get; set; }
+
+        [Required]
+        [Display(Name = "Type")]
         public int ResourceTypeID { get; set; }
         public ResourceType? ResourceType { get; set; }
+
+        [Required]
+        [Display(Name = "Egenskap")]
+        public int ResourcePropertyID { get; set; }
+        public ResourceProperty? ResourceProperty { get; set; }
+
+        [Required]
+        [Display(Name = "Lokasjon")]
+        public int LocationID { get; set; }
+        public Location? Location { get; set; }
+
+        public ICollection<Booking>? Bookings { get; set; }
+
     }
 }

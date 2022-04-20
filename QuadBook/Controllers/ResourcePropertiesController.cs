@@ -23,7 +23,7 @@ namespace QuadBook.Controllers
         // GET: ResourceProperties
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ResourceProperties.Include(r => r.TypeProperties);
+            var applicationDbContext = _context.ResourceProperty.Include(r => r.TypeProperty);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,21 +35,21 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var resourceProperties = await _context.ResourceProperties
-                .Include(r => r.TypeProperties)
-                .FirstOrDefaultAsync(m => m.resourcePropertiesId == id);
-            if (resourceProperties == null)
+            var resourceProperty = await _context.ResourceProperty
+                .Include(r => r.TypeProperty)
+                .FirstOrDefaultAsync(m => m.ResourcePropertyID == id);
+            if (resourceProperty == null)
             {
                 return NotFound();
             }
 
-            return View(resourceProperties);
+            return View(resourceProperty);
         }
 
         // GET: ResourceProperties/Create
         public IActionResult Create()
         {
-            ViewBag.Options = new SelectList(_context.TypeProperties, nameof(TypeProperties.typePropertiesId), nameof(TypeProperties.name));
+            ViewData["TypePropertyID"] = new SelectList(_context.TypeProperties, "TypePropertyID", "TypePropertyName");
             return View();
         }
 
@@ -58,16 +58,16 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("resourcePropertiesId,value,typePropertiesId")] ResourceProperties resourceProperties)
+        public async Task<IActionResult> Create([Bind("ResourcePropertyID,ResourcePropertyValue,TypePropertyID")] ResourceProperty resourceProperty)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(resourceProperties);
+                _context.Add(resourceProperty);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["typePropertiesId"] = new SelectList(_context.Set<TypeProperties>(), "typePropertiesId", "typePropertiesId", resourceProperties.typePropertiesId);
-            return View(resourceProperties);
+            ViewData["TypePropertyID"] = new SelectList(_context.TypeProperties, "TypePropertyID", "TypePropertyName", resourceProperty.TypePropertyID);
+            return View(resourceProperty);
         }
 
         // GET: ResourceProperties/Edit/5
@@ -78,13 +78,13 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var resourceProperties = await _context.ResourceProperties.FindAsync(id);
-            if (resourceProperties == null)
+            var resourceProperty = await _context.ResourceProperty.FindAsync(id);
+            if (resourceProperty == null)
             {
                 return NotFound();
             }
-            ViewData["typePropertiesId"] = new SelectList(_context.Set<TypeProperties>(), "typePropertiesId", "typePropertiesId", resourceProperties.typePropertiesId);
-            return View(resourceProperties);
+            ViewData["TypePropertyID"] = new SelectList(_context.TypeProperties, "TypePropertyID", "TypePropertyName", resourceProperty.TypePropertyID);
+            return View(resourceProperty);
         }
 
         // POST: ResourceProperties/Edit/5
@@ -92,9 +92,9 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("resourcePropertiesId,value,typePropertiesId")] ResourceProperties resourceProperties)
+        public async Task<IActionResult> Edit(int id, [Bind("ResourcePropertyID,ResourcePropertyValue,TypePropertyID")] ResourceProperty resourceProperty)
         {
-            if (id != resourceProperties.resourcePropertiesId)
+            if (id != resourceProperty.ResourcePropertyID)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace QuadBook.Controllers
             {
                 try
                 {
-                    _context.Update(resourceProperties);
+                    _context.Update(resourceProperty);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ResourcePropertiesExists(resourceProperties.resourcePropertiesId))
+                    if (!ResourcePropertyExists(resourceProperty.ResourcePropertyID))
                     {
                         return NotFound();
                     }
@@ -119,8 +119,8 @@ namespace QuadBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["typePropertiesId"] = new SelectList(_context.Set<TypeProperties>(), "typePropertiesId", "typePropertiesId", resourceProperties.typePropertiesId);
-            return View(resourceProperties);
+            ViewData["TypePropertyID"] = new SelectList(_context.TypeProperties, "TypePropertyID", "TypePropertyName", resourceProperty.TypePropertyID);
+            return View(resourceProperty);
         }
 
         // GET: ResourceProperties/Delete/5
@@ -131,15 +131,15 @@ namespace QuadBook.Controllers
                 return NotFound();
             }
 
-            var resourceProperties = await _context.ResourceProperties
-                .Include(r => r.TypeProperties)
-                .FirstOrDefaultAsync(m => m.resourcePropertiesId == id);
-            if (resourceProperties == null)
+            var resourceProperty = await _context.ResourceProperty
+                .Include(r => r.TypeProperty)
+                .FirstOrDefaultAsync(m => m.ResourcePropertyID == id);
+            if (resourceProperty == null)
             {
                 return NotFound();
             }
 
-            return View(resourceProperties);
+            return View(resourceProperty);
         }
 
         // POST: ResourceProperties/Delete/5
@@ -147,15 +147,15 @@ namespace QuadBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var resourceProperties = await _context.ResourceProperties.FindAsync(id);
-            _context.ResourceProperties.Remove(resourceProperties);
+            var resourceProperty = await _context.ResourceProperty.FindAsync(id);
+            _context.ResourceProperty.Remove(resourceProperty);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ResourcePropertiesExists(int id)
+        private bool ResourcePropertyExists(int id)
         {
-            return _context.ResourceProperties.Any(e => e.resourcePropertiesId == id);
+            return _context.ResourceProperty.Any(e => e.ResourcePropertyID == id);
         }
     }
 }

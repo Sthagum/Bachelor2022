@@ -54,7 +54,7 @@ namespace QuadBook.Migrations
                 {
                     CompanyID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CompanyName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,8 +67,8 @@ namespace QuadBook.Migrations
                 {
                     LocationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RoomName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BuildingName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,26 +79,26 @@ namespace QuadBook.Migrations
                 name: "ResourceType",
                 columns: table => new
                 {
-                    resourceTypeId = table.Column<int>(type: "int", nullable: false)
+                    ResourceTypeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    resourceTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ResourceTypeName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceType", x => x.resourceTypeId);
+                    table.PrimaryKey("PK_ResourceType", x => x.ResourceTypeID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TypeProperties",
                 columns: table => new
                 {
-                    typePropertiesId = table.Column<int>(type: "int", nullable: false)
+                    TypePropertyID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TypePropertyName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TypeProperties", x => x.typePropertiesId);
+                    table.PrimaryKey("PK_TypeProperties", x => x.TypePropertyID);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,43 +208,22 @@ namespace QuadBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "ResourceProperty",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    ResourcePropertyID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyID = table.Column<int>(type: "int", nullable: false)
+                    ResourcePropertyValue = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    TypePropertyID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserID);
+                    table.PrimaryKey("PK_ResourceProperty", x => x.ResourcePropertyID);
                     table.ForeignKey(
-                        name: "FK_User_Company_CompanyID",
-                        column: x => x.CompanyID,
-                        principalTable: "Company",
-                        principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ResourceProperties",
-                columns: table => new
-                {
-                    resourcePropertiesId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    typePropertiesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ResourceProperties", x => x.resourcePropertiesId);
-                    table.ForeignKey(
-                        name: "FK_ResourceProperties_TypeProperties_typePropertiesId",
-                        column: x => x.typePropertiesId,
+                        name: "FK_ResourceProperty_TypeProperties_TypePropertyID",
+                        column: x => x.TypePropertyID,
                         principalTable: "TypeProperties",
-                        principalColumn: "typePropertiesId",
+                        principalColumn: "TypePropertyID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -252,33 +231,33 @@ namespace QuadBook.Migrations
                 name: "Resource",
                 columns: table => new
                 {
-                    resourceId = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    resourceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    locationId = table.Column<int>(type: "int", nullable: false),
-                    resourcePropertiesID = table.Column<int>(type: "int", nullable: false),
-                    ResourceTypeID = table.Column<int>(type: "int", nullable: false)
+                    ResourceName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ResourceTypeID = table.Column<int>(type: "int", nullable: false),
+                    ResourcePropertyID = table.Column<int>(type: "int", nullable: false),
+                    LocationID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resource", x => x.resourceId);
+                    table.PrimaryKey("PK_Resource", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Resource_Location_locationId",
-                        column: x => x.locationId,
+                        name: "FK_Resource_Location_LocationID",
+                        column: x => x.LocationID,
                         principalTable: "Location",
                         principalColumn: "LocationID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Resource_ResourceProperties_resourcePropertiesID",
-                        column: x => x.resourcePropertiesID,
-                        principalTable: "ResourceProperties",
-                        principalColumn: "resourcePropertiesId",
+                        name: "FK_Resource_ResourceProperty_ResourcePropertyID",
+                        column: x => x.ResourcePropertyID,
+                        principalTable: "ResourceProperty",
+                        principalColumn: "ResourcePropertyID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceType_ResourceTypeID",
                         column: x => x.ResourceTypeID,
                         principalTable: "ResourceType",
-                        principalColumn: "resourceTypeId",
+                        principalColumn: "ResourceTypeID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -286,29 +265,21 @@ namespace QuadBook.Migrations
                 name: "Booking",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    resource = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    startDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    endDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
+                    UserEmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ResourceID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Booking_Resource_ResourceID",
                         column: x => x.ResourceID,
                         principalTable: "Resource",
-                        principalColumn: "resourceId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Booking_User_UserID",
-                        column: x => x.UserID,
-                        principalTable: "User",
-                        principalColumn: "UserID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -357,19 +328,14 @@ namespace QuadBook.Migrations
                 column: "ResourceID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_UserID",
-                table: "Booking",
-                column: "UserID");
+                name: "IX_Resource_LocationID",
+                table: "Resource",
+                column: "LocationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resource_locationId",
+                name: "IX_Resource_ResourcePropertyID",
                 table: "Resource",
-                column: "locationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Resource_resourcePropertiesID",
-                table: "Resource",
-                column: "resourcePropertiesID");
+                column: "ResourcePropertyID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_ResourceTypeID",
@@ -377,14 +343,9 @@ namespace QuadBook.Migrations
                 column: "ResourceTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResourceProperties_typePropertiesId",
-                table: "ResourceProperties",
-                column: "typePropertiesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_CompanyID",
-                table: "User",
-                column: "CompanyID");
+                name: "IX_ResourceProperty_TypePropertyID",
+                table: "ResourceProperty",
+                column: "TypePropertyID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -408,6 +369,9 @@ namespace QuadBook.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
+                name: "Company");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -417,19 +381,13 @@ namespace QuadBook.Migrations
                 name: "Resource");
 
             migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
                 name: "Location");
 
             migrationBuilder.DropTable(
-                name: "ResourceProperties");
+                name: "ResourceProperty");
 
             migrationBuilder.DropTable(
                 name: "ResourceType");
-
-            migrationBuilder.DropTable(
-                name: "Company");
 
             migrationBuilder.DropTable(
                 name: "TypeProperties");

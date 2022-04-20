@@ -35,7 +35,7 @@ namespace QuadBook.Controllers
             }
 
             var resourceType = await _context.ResourceType
-                .FirstOrDefaultAsync(m => m.resourceTypeId == id);
+                .FirstOrDefaultAsync(m => m.ResourceTypeID == id);
             if (resourceType == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("resourceTypeId,resourceTypeName")] ResourceType resourceType)
+        public async Task<IActionResult> Create([Bind("ResourceTypeID,ResourceTypeName")] ResourceType resourceType)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +87,9 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("resourceTypeId,resourceTypeName")] ResourceType resourceType)
+        public async Task<IActionResult> Edit(int id, [Bind("ResourceTypeID,ResourceTypeName")] ResourceType resourceType)
         {
-            if (id != resourceType.resourceTypeId)
+            if (id != resourceType.ResourceTypeID)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace QuadBook.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ResourceTypeExists(resourceType.resourceTypeId))
+                    if (!ResourceTypeExists(resourceType.ResourceTypeID))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace QuadBook.Controllers
             }
 
             var resourceType = await _context.ResourceType
-                .FirstOrDefaultAsync(m => m.resourceTypeId == id);
+                .FirstOrDefaultAsync(m => m.ResourceTypeID == id);
             if (resourceType == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace QuadBook.Controllers
 
         private bool ResourceTypeExists(int id)
         {
-            return _context.ResourceType.Any(e => e.resourceTypeId == id);
+            return _context.ResourceType.Any(e => e.ResourceTypeID == id);
         }
     }
 }

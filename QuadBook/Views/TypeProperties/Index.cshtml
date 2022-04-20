@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuadBook.Models.TypeProperties>
+﻿@model IEnumerable<QuadBook.Models.TypeProperty>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+                @Html.DisplayNameFor(model => model.TypePropertyName)
             </th>
             <th></th>
         </tr>
@@ -22,12 +22,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.TypePropertyName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.typePropertiesId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.typePropertiesId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.typePropertiesId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TypePropertyID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TypePropertyID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TypePropertyID">Delete</a>
             </td>
         </tr>
 }

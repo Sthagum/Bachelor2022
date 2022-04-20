@@ -12,45 +12,33 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.user)
+            @Html.DisplayNameFor(model => model.UserEmail)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.user)
+            @Html.DisplayFor(model => model.UserEmail)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.resource)
+            @Html.DisplayNameFor(model => model.StartDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.resource)
+            @Html.DisplayFor(model => model.StartDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.startDate)
+            @Html.DisplayNameFor(model => model.EndDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.startDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.endDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.endDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.UserID)
+            @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Resource)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Resource.resourceId)
+            @Html.DisplayFor(model => model.Resource.ResourceName)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -23,7 +23,7 @@ namespace QuadBook.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Booking.Include(b => b.Resource).Include(b => b.User);
+            var applicationDbContext = _context.Booking.Include(b => b.Resource);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,8 +37,7 @@ namespace QuadBook.Controllers
 
             var booking = await _context.Booking
                 .Include(b => b.Resource)
-                .Include(b => b.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -50,8 +49,7 @@ namespace QuadBook.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["ResourceID"] = new SelectList(_context.Set<Resource>(), "resourceId", "resourceId");
-            ViewData["UserID"] = new SelectList(_context.Set<User>(), "UserID", "UserID");
+            ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName");
             return View();
         }
 
@@ -60,7 +58,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,user,resource,startDate,endDate,UserID,ResourceID")] Booking booking)
+        public async Task<IActionResult> Create([Bind("ID,UserEmail,StartDate,EndDate,ResourceID")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -68,8 +66,7 @@ namespace QuadBook.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResourceID"] = new SelectList(_context.Set<Resource>(), "resourceId", "resourceId", booking.ResourceID);
-            ViewData["UserID"] = new SelectList(_context.Set<User>(), "UserID", "UserID", booking.UserID);
+            ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
         }
 
@@ -86,8 +83,7 @@ namespace QuadBook.Controllers
             {
                 return NotFound();
             }
-            ViewData["ResourceID"] = new SelectList(_context.Set<Resource>(), "resourceId", "resourceId", booking.ResourceID);
-            ViewData["UserID"] = new SelectList(_context.Set<User>(), "UserID", "UserID", booking.UserID);
+            ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
         }
 
@@ -96,9 +92,9 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,user,resource,startDate,endDate,UserID,ResourceID")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,UserEmail,StartDate,EndDate,ResourceID")] Booking booking)
         {
-            if (id != booking.Id)
+            if (id != booking.ID)
             {
                 return NotFound();
             }
@@ -112,7 +108,7 @@ namespace QuadBook.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookingExists(booking.Id))
+                    if (!BookingExists(booking.ID))
                     {
                         return NotFound();
                     }
@@ -123,8 +119,7 @@ namespace QuadBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResourceID"] = new SelectList(_context.Set<Resource>(), "resourceId", "resourceId", booking.ResourceID);
-            ViewData["UserID"] = new SelectList(_context.Set<User>(), "UserID", "UserID", booking.UserID);
+            ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
         }
 
@@ -138,8 +133,7 @@ namespace QuadBook.Controllers
 
             var booking = await _context.Booking
                 .Include(b => b.Resource)
-                .Include(b => b.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -161,7 +155,7 @@ namespace QuadBook.Controllers
 
         private bool BookingExists(int id)
         {
-            return _context.Booking.Any(e => e.Id == id);
+            return _context.Booking.Any(e => e.ID == id);
         }
     }
 }
