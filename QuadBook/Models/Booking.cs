@@ -8,7 +8,7 @@ namespace QuadBook.Models
         [Required]
         [Display(Name = "BrukerEpost")]
         [StringLength(50, MinimumLength = 3)]
-        public string UserEmail { get; set; }
+        public string? UserEmail { get; set; }
 
         [Required(ErrorMessage = "Vennligst spesifiser startdato")]
         [Display(Name = "Startdato")]

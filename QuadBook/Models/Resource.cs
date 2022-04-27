@@ -9,7 +9,7 @@ namespace QuadBook.Models
         [Required(ErrorMessage = "Vennligst fyll ut ressursnavn")]
         [Display(Name = "Ressursnavn")]
         [StringLength(30, ErrorMessage = "Ressursnavnet må være fra 2 til 30 tegn eller bokstaver", MinimumLength = 3)]
-        public string ResourceName { get; set; }
+        public string? ResourceName { get; set; }
 
         [Required]
         [Display(Name = "Type")]
