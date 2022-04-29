@@ -11,15 +11,12 @@ namespace QuadBook.Models
         [StringLength(30, ErrorMessage = "Ressursnavnet må være fra 2 til 30 tegn eller bokstaver", MinimumLength = 3)]
         public string? ResourceName { get; set; }
 
+        public string? ResourceInfo { get; set; }
+
         [Required]
         [Display(Name = "Type")]
         public int ResourceTypeID { get; set; }
         public ResourceType? ResourceType { get; set; }
-
-        [Required]
-        [Display(Name = "Egenskap")]
-        public int ResourcePropertyID { get; set; }
-        public ResourceProperty? ResourceProperty { get; set; }
 
         [Required]
         [Display(Name = "Lokasjon")]

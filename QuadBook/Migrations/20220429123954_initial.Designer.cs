@@ -12,7 +12,7 @@ using QuadBook.Data;
 namespace QuadBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220417154849_initial")]
+    [Migration("20220429123954_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,24 +255,6 @@ namespace QuadBook.Migrations
                     b.ToTable("Booking");
                 });
 
-            modelBuilder.Entity("QuadBook.Models.Company", b =>
-                {
-                    b.Property<int>("CompanyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyID"), 1L, 1);
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("CompanyID");
-
-                    b.ToTable("Company");
-                });
-
             modelBuilder.Entity("QuadBook.Models.Location", b =>
                 {
                     b.Property<int>("LocationID")
@@ -280,11 +262,6 @@ namespace QuadBook.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationID"), 1L, 1);
-
-                    b.Property<string>("BuildingName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RoomName")
                         .IsRequired()
@@ -307,13 +284,13 @@ namespace QuadBook.Migrations
                     b.Property<int>("LocationID")
                         .HasColumnType("int");
 
+                    b.Property<string>("ResourceInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ResourceName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("ResourcePropertyID")
-                        .HasColumnType("int");
 
                     b.Property<int>("ResourceTypeID")
                         .HasColumnType("int");
@@ -322,34 +299,9 @@ namespace QuadBook.Migrations
 
                     b.HasIndex("LocationID");
 
-                    b.HasIndex("ResourcePropertyID");
-
                     b.HasIndex("ResourceTypeID");
 
                     b.ToTable("Resource");
-                });
-
-            modelBuilder.Entity("QuadBook.Models.ResourceProperty", b =>
-                {
-                    b.Property<int>("ResourcePropertyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResourcePropertyID"), 1L, 1);
-
-                    b.Property<string>("ResourcePropertyValue")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("TypePropertyID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ResourcePropertyID");
-
-                    b.HasIndex("TypePropertyID");
-
-                    b.ToTable("ResourceProperty");
                 });
 
             modelBuilder.Entity("QuadBook.Models.ResourceType", b =>
@@ -368,24 +320,6 @@ namespace QuadBook.Migrations
                     b.HasKey("ResourceTypeID");
 
                     b.ToTable("ResourceType");
-                });
-
-            modelBuilder.Entity("QuadBook.Models.TypeProperty", b =>
-                {
-                    b.Property<int>("TypePropertyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypePropertyID"), 1L, 1);
-
-                    b.Property<string>("TypePropertyName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("TypePropertyID");
-
-                    b.ToTable("TypeProperties");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -458,12 +392,6 @@ namespace QuadBook.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuadBook.Models.ResourceProperty", "ResourceProperty")
-                        .WithMany()
-                        .HasForeignKey("ResourcePropertyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("QuadBook.Models.ResourceType", "ResourceType")
                         .WithMany()
                         .HasForeignKey("ResourceTypeID")
@@ -472,20 +400,7 @@ namespace QuadBook.Migrations
 
                     b.Navigation("Location");
 
-                    b.Navigation("ResourceProperty");
-
                     b.Navigation("ResourceType");
-                });
-
-            modelBuilder.Entity("QuadBook.Models.ResourceProperty", b =>
-                {
-                    b.HasOne("QuadBook.Models.TypeProperty", "TypeProperty")
-                        .WithMany()
-                        .HasForeignKey("TypePropertyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TypeProperty");
                 });
 
             modelBuilder.Entity("QuadBook.Models.Resource", b =>

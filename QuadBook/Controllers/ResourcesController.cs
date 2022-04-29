@@ -25,7 +25,7 @@ namespace QuadBook.Controllers
         // GET: Resources
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Resource.Include(r => r.Location).Include(r => r.ResourceProperty).Include(r => r.ResourceType);
+            var applicationDbContext = _context.Resource.Include(r => r.Location).Include(r => r.ResourceType);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -39,7 +39,6 @@ namespace QuadBook.Controllers
 
             var resource = await _context.Resource
                 .Include(r => r.Location)
-                .Include(r => r.ResourceProperty)
                 .Include(r => r.ResourceType)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (resource == null)
@@ -53,8 +52,7 @@ namespace QuadBook.Controllers
         // GET: Resources/Create
         public IActionResult Create()
         {
-            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "BuildingName");
-            ViewData["ResourcePropertyID"] = new SelectList(_context.ResourceProperty, "ResourcePropertyID", "ResourcePropertyValue");
+            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "RoomName");
             ViewData["ResourceTypeID"] = new SelectList(_context.ResourceType, "ResourceTypeID", "ResourceTypeName");
             return View();
         }
@@ -64,7 +62,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ResourceName,ResourceTypeID,ResourcePropertyID,LocationID")] Resource resource)
+        public async Task<IActionResult> Create([Bind("ID,ResourceName,ResourceInfo,ResourceTypeID,LocationID")] Resource resource)
         {
             if (ModelState.IsValid)
             {
@@ -72,8 +70,7 @@ namespace QuadBook.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "BuildingName", resource.LocationID);
-            ViewData["ResourcePropertyID"] = new SelectList(_context.ResourceProperty, "ResourcePropertyID", "ResourcePropertyValue", resource.ResourcePropertyID);
+            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "RoomName", resource.LocationID);
             ViewData["ResourceTypeID"] = new SelectList(_context.ResourceType, "ResourceTypeID", "ResourceTypeName", resource.ResourceTypeID);
             return View(resource);
         }
@@ -91,8 +88,7 @@ namespace QuadBook.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "BuildingName", resource.LocationID);
-            ViewData["ResourcePropertyID"] = new SelectList(_context.ResourceProperty, "ResourcePropertyID", "ResourcePropertyValue", resource.ResourcePropertyID);
+            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "RoomName", resource.LocationID);
             ViewData["ResourceTypeID"] = new SelectList(_context.ResourceType, "ResourceTypeID", "ResourceTypeName", resource.ResourceTypeID);
             return View(resource);
         }
@@ -102,7 +98,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ResourceName,ResourceTypeID,ResourcePropertyID,LocationID")] Resource resource)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ResourceName,ResourceInfo,ResourceTypeID,LocationID")] Resource resource)
         {
             if (id != resource.ID)
             {
@@ -129,8 +125,7 @@ namespace QuadBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "BuildingName", resource.LocationID);
-            ViewData["ResourcePropertyID"] = new SelectList(_context.ResourceProperty, "ResourcePropertyID", "ResourcePropertyValue", resource.ResourcePropertyID);
+            ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "RoomName", resource.LocationID);
             ViewData["ResourceTypeID"] = new SelectList(_context.ResourceType, "ResourceTypeID", "ResourceTypeName", resource.ResourceTypeID);
             return View(resource);
         }
@@ -145,7 +140,6 @@ namespace QuadBook.Controllers
 
             var resource = await _context.Resource
                 .Include(r => r.Location)
-                .Include(r => r.ResourceProperty)
                 .Include(r => r.ResourceType)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (resource == null)

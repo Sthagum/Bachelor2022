@@ -49,26 +49,12 @@ namespace QuadBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
-                columns: table => new
-                {
-                    CompanyID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Company", x => x.CompanyID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
                     LocationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BuildingName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    RoomName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,19 +72,6 @@ namespace QuadBook.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ResourceType", x => x.ResourceTypeID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TypeProperties",
-                columns: table => new
-                {
-                    TypePropertyID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypePropertyName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TypeProperties", x => x.TypePropertyID);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,34 +181,14 @@ namespace QuadBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ResourceProperty",
-                columns: table => new
-                {
-                    ResourcePropertyID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResourcePropertyValue = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    TypePropertyID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ResourceProperty", x => x.ResourcePropertyID);
-                    table.ForeignKey(
-                        name: "FK_ResourceProperty_TypeProperties_TypePropertyID",
-                        column: x => x.TypePropertyID,
-                        principalTable: "TypeProperties",
-                        principalColumn: "TypePropertyID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Resource",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ResourceName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ResourceInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResourceTypeID = table.Column<int>(type: "int", nullable: false),
-                    ResourcePropertyID = table.Column<int>(type: "int", nullable: false),
                     LocationID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -246,12 +199,6 @@ namespace QuadBook.Migrations
                         column: x => x.LocationID,
                         principalTable: "Location",
                         principalColumn: "LocationID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Resource_ResourceProperty_ResourcePropertyID",
-                        column: x => x.ResourcePropertyID,
-                        principalTable: "ResourceProperty",
-                        principalColumn: "ResourcePropertyID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceType_ResourceTypeID",
@@ -333,19 +280,9 @@ namespace QuadBook.Migrations
                 column: "LocationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resource_ResourcePropertyID",
-                table: "Resource",
-                column: "ResourcePropertyID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Resource_ResourceTypeID",
                 table: "Resource",
                 column: "ResourceTypeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ResourceProperty_TypePropertyID",
-                table: "ResourceProperty",
-                column: "TypePropertyID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -369,9 +306,6 @@ namespace QuadBook.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "Company");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -384,13 +318,7 @@ namespace QuadBook.Migrations
                 name: "Location");
 
             migrationBuilder.DropTable(
-                name: "ResourceProperty");
-
-            migrationBuilder.DropTable(
                 name: "ResourceType");
-
-            migrationBuilder.DropTable(
-                name: "TypeProperties");
         }
     }
 }
