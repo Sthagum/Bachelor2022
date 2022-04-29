@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Adminside";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Administrator side</h1>
+
+        <ul class="list-group">
+                                    <li class="nav-item">
+                <a class="list-group-item text-black" asp-area="" asp-controller="Bookings" asp-action="Index">Administrer Booking</a>
+            </li>
+                                    <li class="nav-item">
+                <a class="list-group-item text-black" asp-area="" asp-controller="Resources" asp-action="Index">Administrer Ressurser</a>
+            </li>
+                                    <li class="nav-item">
+                <a class="list-group-item text-black" asp-area="" asp-controller="ResourceTypes" asp-action="Index">Administrer RessursTyper</a>
+            </li>
+                                    <li class="nav-item">
+                <a class="list-group-item text-black" asp-area="" asp-controller="Locations" asp-action="Index">Administrer Lokasjon</a>
+            </li>
+        </ul>
+</div>
