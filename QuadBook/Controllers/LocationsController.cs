@@ -57,7 +57,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LocationID,RoomName,BuildingName")] Location location)
+        public async Task<IActionResult> Create([Bind("LocationID,RoomName")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LocationID,RoomName,BuildingName")] Location location)
+        public async Task<IActionResult> Edit(int id, [Bind("LocationID,RoomName")] Location location)
         {
             if (id != location.LocationID)
             {

@@ -2,13 +2,13 @@
 
 namespace QuadBook.Models
 {
-    public class Booking
+    public class Booking : IValidatableObject
     {
         public int ID { get; set; }
         [Required]
         [Display(Name = "BrukerEpost")]
         [StringLength(50, MinimumLength = 3)]
-        public string UserEmail { get; set; }
+        public string? UserEmail { get; set; }
 
         [Required(ErrorMessage = "Vennligst spesifiser startdato")]
         [Display(Name = "Startdato")]
@@ -24,5 +24,13 @@ namespace QuadBook.Models
         [Display(Name = "Ressurs")]
         public int ResourceID { get; set; }
         public Resource? Resource { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            if (EndDate < StartDate)
+            {
+                yield return new ValidationResult("Sluttdato kan ikke være før Startdato!");
+            }
+        }
     }
 }

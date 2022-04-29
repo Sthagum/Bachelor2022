@@ -16,13 +16,10 @@
                 @Html.DisplayNameFor(model => model.ResourceName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ResourceInfo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ResourceType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResourceProperty.TypeProperty.TypePropertyName)
-            </th>
-            <th>
-                Egenskapsverdi
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Location)
@@ -37,16 +34,13 @@
                 @Html.DisplayFor(modelItem => item.ResourceName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ResourceInfo)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ResourceType.ResourceTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ResourceProperty.TypeProperty.TypePropertyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResourceProperty.ResourcePropertyValue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.BuildingName)
+                @Html.DisplayFor(modelItem => item.Location.RoomName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

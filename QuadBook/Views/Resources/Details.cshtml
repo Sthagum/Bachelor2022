@@ -17,22 +17,22 @@
             @Html.DisplayFor(model => model.ResourceName)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResourceInfo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResourceInfo)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ResourceType)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ResourceType.ResourceTypeName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ResourceProperty)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ResourceProperty.ResourcePropertyValue)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Location)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location.BuildingName)
+            @Html.DisplayFor(model => model.Location.RoomName)
         </dd>
     </dl>
 </div>

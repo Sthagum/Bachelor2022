@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuadBook</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,30 +20,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hjemmeside</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Hjemmeside</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Sikkerhet</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Mine Bookinger</a>
                         </li>
                                                 <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Bookings" asp-action="Index">Booking</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bookings" asp-action="Index">Booking</a>
                         </li>
                                                 <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Resources" asp-action="Index">Ressurser</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Resources" asp-action="Index">Ressurser</a>
                         </li>
                                                 <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ResourceTypes" asp-action="Index">RessursTyper</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="ResourceTypes" asp-action="Index">RessursTyper</a>
                         </li>
                                                 <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TypeProperties" asp-action="Index">TypeEgenskaper</a>
-                                                    </li>
-                                                <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ResourceProperties" asp-action="Index">RessursEgenskaper</a>
-                        </li>
-                                                </li>
-                                                <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Locations" asp-action="Index">Lokasjon</a>
-                        </li>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Locations" asp-action="Index">Lokasjon</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -59,7 +51,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - QuadBook - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - QuadBook
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
