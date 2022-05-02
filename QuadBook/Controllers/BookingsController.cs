@@ -49,15 +49,12 @@ namespace QuadBook.Controllers
         }
 
         [Authorize]
-        public IEnumerable<Booking> UserBookings()
-        {
-            var results = this._context.Booking.Include(b => b.Resource)
-                .Where(g => g.UserEmail == User.Identity.Name)
-                .AsEnumerable()
-                .OrderBy(g => g.UserEmail)
-                .ToArray();
 
-            return results;
+        public async Task<IActionResult> UserBookings()
+        {
+            var applicationDbContext = _context.Booking.Include(b => b.Resource)
+            .Where(g => g.UserEmail == User.Identity.Name);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Bookings/Create
