@@ -48,6 +48,18 @@ namespace QuadBook.Controllers
             return View(booking);
         }
 
+        [Authorize]
+        public IEnumerable<Booking> UserBookings()
+        {
+            var results = this._context.Booking
+                .Where(g => g.UserEmail == User.Identity.Name)
+                .AsEnumerable()
+                .OrderBy(g => g.UserEmail)
+                .ToArray();
+
+            return results;
+        }
+
         // GET: Bookings/Create
         public IActionResult Create()
         {

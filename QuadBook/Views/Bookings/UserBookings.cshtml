@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QuadBook.Models.Booking>
+
+@{
+    ViewData["Title"] = "UserBookings";
+}
+
+<h1>UserBookings</h1>
+
+<p>
+    <a asp-action="Create">Opprett ny</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var result in Model)
+{
+<tr>
+            <td>
+                @Html.DisplayFor(modelitem => result.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => result.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => result.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => result.Resource.ResourceName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@result.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@result.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@result.ID">Delete</a>
+            </td>
+        </tr>
+}
