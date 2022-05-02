@@ -75,7 +75,7 @@ namespace QuadBook.Controllers
             {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(UserBookings));
+                return RedirectToAction(nameof(Index));
             }
             ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
@@ -128,7 +128,7 @@ namespace QuadBook.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(UserBookings));
+                return RedirectToAction(nameof(Index));
             }
             ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
@@ -161,7 +161,7 @@ namespace QuadBook.Controllers
             var booking = await _context.Booking.FindAsync(id);
             _context.Booking.Remove(booking);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(UserBookings));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool BookingExists(int id)
