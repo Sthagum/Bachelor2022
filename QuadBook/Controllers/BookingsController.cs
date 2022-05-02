@@ -71,12 +71,25 @@ namespace QuadBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,UserEmail,StartDate,EndDate,ResourceID")] Booking booking)
         {
-            if (ModelState.IsValid)
+            var applicationDbContext = _context.Booking.Include(b => b.Resource);
+
+            foreach (Booking b in applicationDbContext)
             {
+                if (b.ResourceID == booking.ResourceID)
+                {
+                    if (((booking.StartDate < b.StartDate) && (booking.EndDate <= b.StartDate)) ||
+                       ((booking.StartDate >= b.EndDate) && (booking.EndDate > b.EndDate)))
+                    {
+                        continue;
+                    }
+                }
+            }
+            if (ModelState.IsValid) {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
             return View(booking);
         }
