@@ -87,7 +87,7 @@ namespace QuadBook.Controllers
             if (ModelState.IsValid) {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(UserBookings));
+                return RedirectToAction(nameof(Index));
             }
 
             ViewData["ResourceID"] = new SelectList(_context.Resource, "ID", "ResourceName", booking.ResourceID);
