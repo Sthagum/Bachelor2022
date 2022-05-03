@@ -250,7 +250,7 @@ namespace QuadBook.Migrations
 
                     b.HasIndex("ResourceID");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Booking", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.Location", b =>
@@ -268,7 +268,7 @@ namespace QuadBook.Migrations
 
                     b.HasKey("LocationID");
 
-                    b.ToTable("Location");
+                    b.ToTable("Location", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.Resource", b =>
@@ -299,7 +299,7 @@ namespace QuadBook.Migrations
 
                     b.HasIndex("ResourceTypeID");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resource", (string)null);
                 });
 
             modelBuilder.Entity("QuadBook.Models.ResourceType", b =>
@@ -317,7 +317,7 @@ namespace QuadBook.Migrations
 
                     b.HasKey("ResourceTypeID");
 
-                    b.ToTable("ResourceType");
+                    b.ToTable("ResourceType", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

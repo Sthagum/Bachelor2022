@@ -82,6 +82,12 @@ namespace QuadBook.Controllers
                     {
                         continue;
                     }
+
+                    else
+                    {
+                        return View(booking);
+                    }
+
                 }
             }
             if (ModelState.IsValid) {
