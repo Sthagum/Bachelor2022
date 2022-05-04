@@ -15,12 +15,13 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #678c6b;
+    background-color: #ffffff;
     color: #ffffff;
+    font-weight: 900;
 }
 
 .navbar {
-    background-color: #435b4b;
+    background-color: #1e4b24;
 }
 
 .container {
@@ -32,5 +33,5 @@ ul {
 }
 
 a {
-    color: whitesmoke;
+    color: #1e4b24;
 }
