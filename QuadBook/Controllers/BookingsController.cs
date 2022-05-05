@@ -85,7 +85,8 @@ namespace QuadBook.Controllers
 
                     else
                     {
-                        return View(booking);
+                        TempData["DateTaken"] = "Ressursen er opptatt denne perioden, vennligst velg annen dato.";
+                        return RedirectToPage("/Bookings/Create");
                     }
 
                 }
