@@ -181,7 +181,7 @@ namespace QuadBook.Controllers
             var booking = await _context.Booking.FindAsync(id);
             _context.Booking.Remove(booking);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserBookings));
         }
 
         private bool BookingExists(int id)

@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserEmail)
+                Bruker
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Start dato
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                Slutt dato
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resource)
+                Ressurs
             </th>
             <th></th>
         </tr>
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Resource.ResourceName)
             </td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ID">Slett</a>
             </td>
         </tr>
 }
