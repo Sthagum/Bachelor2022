@@ -29,6 +29,25 @@ namespace QuadBook.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Resources
+        public async Task<IActionResult> BookResource(string sortOrder)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+            var resources = from r in _context.Resource.Include(r => r.ResourceType).Include(r => r.Location)
+                            select r;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    resources = resources.OrderByDescending(r => r.ResourceName);
+                    break;
+                case "type_desc":
+                    resources = resources.OrderBy(r => r.ResourceType);
+                    break;
+            }
+            return View(await resources.AsNoTracking().ToListAsync());
+        }
+
         // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int? id)
         {

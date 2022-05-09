@@ -1,3 +1,4 @@
+/*Site css*/
 html {
   font-size: 14px;
 }
@@ -20,20 +21,22 @@ body {
     font-weight: 900;
 }
 
-.navbar {
-    background-color: #1e4b24;
-}
-
-.container {
-    color: #000000;
-}
-
 ul {
     list-style-type: none;
 }
 
 a {
     color: #1e4b24;
+}
+
+/*Changes against bootstrap*/
+
+.navbar {
+    background-color: #1e4b24;
+}
+
+.container {
+    color: #000000;
 }
 
 .btn-primary {
