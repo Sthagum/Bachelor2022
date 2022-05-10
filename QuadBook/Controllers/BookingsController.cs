@@ -39,7 +39,7 @@ namespace QuadBook.Controllers
             switch (sortOrder)
             {
                 case "name_desc":
-                    resources = resources.OrderByDescending(r => r.ResourceName);
+                    resources = resources.OrderBy(r => r.ResourceName);
                     break;
                 case "type_desc":
                     resources = resources.OrderBy(r => r.ResourceType);
