@@ -4,25 +4,22 @@
     ViewData["Title"] = "BookResource";
 }
 
-<h1>Index</h1>
+<h1>Book en av ressursene</h1>
 
-<p>
-    <a asp-action="Create">Opprett ny</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="BookResource" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.ResourceName)</a>
+                <a asp-action="BookResource" asp-route-sortOrder="@ViewData["NameSortParm"]">Ressurs</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ResourceInfo)
+                Informasjon
             </th>
             <th>
-                <a asp-action="BookResource" asp-route-sortOrder="@ViewData["TypeSortParm"]">@Html.DisplayNameFor(model => model.ResourceType)</a>
+                <a asp-action="BookResource" asp-route-sortOrder="@ViewData["TypeSortParm"]">Type</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                Lokasjon
             </th>
             <th></th>
         </tr>
