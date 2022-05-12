@@ -88,7 +88,7 @@ namespace QuadBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserEmail,StartDate,EndDate,ResourceID")] Booking booking)
+        public async Task<IActionResult> Create([Bind("UserEmail,StartDate,EndDate,ResourceID")] Booking booking)
         {
             var applicationDbContext = _context.Booking.Include(b => b.Resource);
 
