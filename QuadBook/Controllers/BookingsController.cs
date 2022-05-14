@@ -76,6 +76,13 @@ namespace QuadBook.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> ResourceBookings(Booking booking) 
+        {
+            var applicationDbContext = _context.Booking.Include(b => b.Resource)
+            .Where(g => g.ResourceID == booking.ID);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Bookings/Create
         public IActionResult Create()
         {
